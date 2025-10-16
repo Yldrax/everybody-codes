@@ -11,3 +11,6 @@ wheels/
 
 # Everybody Codes Inputs
 *.txt
+
+# Everybody Codes User Data
+userdata.json
