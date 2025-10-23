@@ -31,15 +31,15 @@ def decrypt_aes(key: str, encrypted_hex: str) -> str:
     """
     encrypted_bytes = unhexlify(encrypted_hex)
 
-    key_bytes = key.encode('utf-8')
-    iv = key[:16].encode('utf-8')
+    key_bytes = key.encode("utf-8")
+    iv = key[:16].encode("utf-8")
 
     cipher = AES.new(key_bytes, AES.MODE_CBC, iv)
 
     decrypted_bytes = cipher.decrypt(encrypted_bytes)
     unpadded = unpad(decrypted_bytes, AES.block_size)
 
-    return unpadded.decode('utf-8')
+    return unpadded.decode("utf-8")
 
 
 def get_input(year: int, day: int):
@@ -55,13 +55,12 @@ def get_input(year: int, day: int):
         timeout=5,
     )
     notes = r.json()
-    
 
     # Get the AES Key
     r = rq.get(
         f"https://everybody.codes/api/event/{year}/quest/{day}",
         cookies=cookies,
-        timeout=5
+        timeout=5,
     )
     aes_keys = r.json()
 
@@ -75,6 +74,7 @@ def get_input(year: int, day: int):
             break
 
     return input_dict
+
 
 def load_input(year: int, day: int, number: int, reload: bool = False):
     """Load Input form File or Get from Web and save to File"""
@@ -93,4 +93,4 @@ def load_input(year: int, day: int, number: int, reload: bool = False):
 
 
 if __name__ == "__main__":
-    print(load_input(2024,1,1))
+    print(load_input(2024, 1, 1))
