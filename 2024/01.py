@@ -1,5 +1,5 @@
 """First Day"""
-
+from utils import load_input
 
 # 1
 def calc_monster(monster: str) -> int:
@@ -57,9 +57,9 @@ def calc_potions3(input_str: str) -> int:
 if __name__ == "__main__":
     from utils import get_input
 
-    INPUT1 = get_input(1, 1)
-    INPUT2 = get_input(1, 2)
-    INPUT3 = get_input(1, 3)
+    INPUT1 = load_input(2024, 1, 1)
+    INPUT2 = load_input(2024, 1, 2)
+    INPUT3 = load_input(2024, 1, 3)
     print(calc_potions1(INPUT1))
     print(calc_potions2(INPUT2))
     print(calc_potions3(INPUT3))
