@@ -1,5 +1,5 @@
 """First Day"""
-from utils import load_input
+
 
 # 1
 def calc_monster(monster: str) -> int:
@@ -15,6 +15,8 @@ def calc_monster(monster: str) -> int:
             return 5
         case "x":
             return 0
+        case _:
+            return -999999
 
 
 def calc_potions1(input_str: str) -> int:
@@ -31,19 +33,20 @@ def calc_potions2(input_str: str) -> int:
     """Calculate needed Potions"""
     total = 0
     for i in range(0, len(input_str), 2):
-        pair = input_str[i : i + 2] 
+        pair = input_str[i : i + 2]
         total += calc_monster(pair[0])
         total += calc_monster(pair[1])
         if "x" not in pair:
             total += 2
     return total
 
-#3
+
+# 3
 def calc_potions3(input_str: str) -> int:
     """Calculate needed Potions"""
     total = 0
     for i in range(0, len(input_str), 3):
-        trio = input_str[i : i + 3] 
+        trio = input_str[i : i + 3]
         total += calc_monster(trio[0])
         total += calc_monster(trio[1])
         total += calc_monster(trio[2])
@@ -54,8 +57,9 @@ def calc_potions3(input_str: str) -> int:
             total += 2
     return total
 
+
 if __name__ == "__main__":
-    from utils import get_input
+    from utils import load_input
 
     INPUT1 = load_input(2024, 1, 1)
     INPUT2 = load_input(2024, 1, 2)
