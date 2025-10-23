@@ -1,18 +1,11 @@
 """Stuff used for more than one day"""
 
 import json
+from pathlib import Path
 from binascii import unhexlify
 import requests as rq
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
-
-
-def get_input_old(day: int, part: int):
-    """Read the Input form the text file"""
-    with open(f"2024/inputs/{day:02d}_{part}.txt", "r", encoding="utf-8") as f:
-        text = f.read()
-
-    return text
 
 
 def load_user_data():
@@ -75,14 +68,29 @@ def get_input(year: int, day: int):
     # Decoding
     input_dict = {}
     for number, note in notes.items():
-        plaintext = decrypt_aes(aes_keys[f"key{number}"], note)
-        input_dict[number] = plaintext
+        try:
+            plaintext = decrypt_aes(aes_keys[f"key{number}"], note)
+            input_dict[number] = plaintext
+        except KeyError:
+            break
 
     return input_dict
 
-def load_input(year: int, day: int, number: int):
+def load_input(year: int, day: int, number: int, reload: bool = False):
     """Load Input form File or Get from Web and save to File"""
-    if 
+    file_path = Path(f"{year}/inputs/{day:02d}_{number}.txt")
+    try:
+        if reload or not file_path.exists():
+            input_dict = get_input(year, day)
+            input_str = input_dict[str(number)]
+            file_path.write_text(input_str, "utf-8")
+        else:
+            input_str = file_path.read_text("utf-8")
+        return input_str
+    except KeyError:
+        print("Do previous quest first")
+        return "Do previous quest first"
+
 
 if __name__ == "__main__":
-    get_input(2024,1)
+    print(load_input(2024,1,1))
