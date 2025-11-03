@@ -34,6 +34,7 @@ def quest_2(input_str: str):
                 continue
 
             for j in range(len(subtext)-len(word)):
+                pass
                 
             
 
@@ -57,6 +58,6 @@ POWE PO WER P OWE R
 THERE IS THE END
 QAQAQ"""
 
-print(quest_2(teststring))
+    print(quest_2(teststring))
 
     
