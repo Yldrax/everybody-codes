@@ -3,18 +3,18 @@
 from collections import Counter
 
 
-def stack_crates(l: list[int]) -> int:
-    unique_crates = set(l)
+def stack_crates(ls: list[int]) -> int:
+    unique_crates = set(ls)
     return sum(unique_crates)
 
 
-def pack_mushroom(l: list[int]) -> int:
-    unique_crates = list(set(l))
+def pack_mushroom(ls: list[int]) -> int:
+    unique_crates = list(set(ls))
     return sum(unique_crates[:20])
 
 
-def minimize_sets(l: list[int]) -> int:
-    _, sets = Counter(l).most_common(1)[0]
+def minimize_sets(ls: list[int]) -> int:
+    _, sets = Counter(ls).most_common(1)[0]
     return sets
 
 
