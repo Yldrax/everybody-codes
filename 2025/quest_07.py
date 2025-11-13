@@ -47,27 +47,26 @@ def find_name_sum(notes: str) -> int:
 
 # 3
 def build_names(notes: str) -> int:
-    names = []
     prefixes = [name for name in get_names(notes) if check_name(name, get_rules(notes))]
     rules = get_rules(notes)
 
-    def add_letters(name: str) -> None:
+    def add_letters(name: str) -> set[str]:
+        names = set()
         if 7 <= len(name) <= 11:
-            names.append(name)
+            names.add(name)
         if len(name) == 11:
-            return None
+            return names
 
-        try:
-            for letter in rules[name[-1]]:
-                add_letters(name + letter)
-        except KeyError:
-            pass
-        return None
+        for letter in rules.get(name[-1], []):
+            names |= add_letters(name + letter)
 
+        return names
+
+    total_names = set()
     for prefix in prefixes:
-        add_letters(prefix)
+        total_names |= add_letters(prefix)
 
-    return len(set(names))
+    return len(total_names)
 
 
 if __name__ == "__main__":
