@@ -43,7 +43,7 @@ def calc_best_strike(notes: list[int]) -> int:
 
     for i in range(len(notes) - 1):
         new_string = (min(notes[i], notes[i + 1]), max(notes[i], notes[i + 1]))
-        strings[new_string] = 1
+        strings[new_string] += 1
 
     for strike in tqdm(list(strikes)):
         current_strike = 0
